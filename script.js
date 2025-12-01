@@ -14,7 +14,7 @@ let playerName = "Name";
 let spaceCount = 0;
 let guessCount = 0;   // for the 1–100 “game”
 let triviaChosen = { "5": false, "22": false, "Potato": false };
-let TEXT_SPEED = 0.5;   // higher = slower, lower = faster
+let TEXT_SPEED = 1.7;   // higher = slower, lower = faster
 let scene12Started = false;
 let isTyping = false;
 // ===== SCENE NAVIGATION =====
