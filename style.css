@@ -10,9 +10,8 @@
 
 *{
   box-sizing:border-box;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "JetBrains Mono","Fira Code",ui-monospace,monospace;
 }
-
 html,body{
   margin:0;
   padding:0;
