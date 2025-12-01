@@ -1,0 +1,232 @@
+:root{
+  --bg:#050b1e;
+  --text:#f5f7ff;
+  --muted:#636a8b;
+  --accent:#ffd447;
+  --accent-soft:#ffe996;
+  --purple:#4b3f8c;
+  --border:#1d2442;
+}
+
+*{
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+body{
+  background:radial-gradient(circle at 20% 0%, #142043 0, transparent 55%),
+             radial-gradient(circle at 110% 120%, #231338 0, transparent 55%),
+             var(--bg);
+  color:var(--text);
+  display:flex;
+  justify-content:center;
+  align-items:stretch;
+}
+
+#game{
+  width:100%;
+  max-width:1100px;
+  padding:24px 32px 32px;
+  display:flex;
+  flex-direction:column;
+}
+
+/* HEADER (top) */
+
+#titleBlock{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+#title{
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  text-shadow:0 0 16px rgba(255,212,71,.45);
+}
+
+#subtitle{
+  margin-top:6px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* MAIN SCREEN */
+
+#screen{
+  flex:1;
+  border-radius:18px;
+  border:1px solid var(--border);
+  background:rgba(2,6,24,0.92);
+  padding:32px 40px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
+
+#narration{
+  flex:1;
+  display:flex;
+  flex-direction:column;          /* stack lines vertically */
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-family: "JetBrains Mono","Fira Code","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:26px;
+  line-height:1.4;
+  max-width:800px;
+  margin:0 auto;
+}
+
+#narration .line.spacer{
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+}
+
+#narration .line{
+  width: 100%;
+  font-family: "JetBrains Mono","Fira Code","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+
+/* visual “playfield” – appears under main text when needed */
+#visual{
+  max-height:160px;
+  margin:0 auto 12px;
+  width:100%;
+  max-width:600px;
+  text-align:center;
+  font-size:44px;
+  overflow:auto;
+  font-family: "JetBrains Mono","Fira Code",ui-monospace,monospace;
+}
+
+#choices{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:4px;
+}
+
+button.choice{
+  background:transparent;
+  border-radius:999px;
+  border:1px solid var(--border);
+  padding:10px 22px;
+  font-size:17px; /* +3 from 14 */
+  color:var(--text);
+  cursor:pointer;
+  transition:.15s;
+  font-family: "JetBrains Mono","Fira Code",ui-monospace,monospace;
+}
+
+button.choice:hover:not(:disabled){
+  border-color:var(--accent-soft);
+  color:var(--accent-soft);
+  transform:translateY(-1px);
+}
+
+button.choice:disabled{
+  opacity:0.3;
+  cursor:not-allowed;
+}
+
+#inputRow{
+  display:none;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin-bottom:6px;
+  font-family:"JetBrains Mono","Fira Code",ui-monospace,monospace;
+  font-size:14px;
+}
+
+#nameInput{
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:#050a19;
+  color:var(--text);
+  min-width:160px;
+}
+
+/* BOTTOM PROMPT */
+
+#meta{
+  margin-top:12px;
+  text-align:center;
+  font-family:"JetBrains Mono","Fira Code",ui-monospace,monospace;
+  font-size:20px;
+  color:var(--purple);
+}
+
+#meta span:first-child{
+  display:none;  /* we only use the hint span */
+}
+
+.glitch{
+  animation: gl 90ms steps(2,end) 8;
+  text-shadow:
+    -2px 0 #ff2e63,
+     2px 0 #3ec5ff;
+}
+
+@keyframes gl{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(-2px,1px);}
+  50%{transform:translate(2px,-1px);}
+  75%{transform:translate(-1px,-2px);}
+  100%{transform:translate(1px,2px);}
+}
+
+
+.apple{
+  display:inline-block;
+  margin:2px;
+  filter:drop-shadow(0 0 5px rgba(255,255,255,0.25));
+}
+
+.confetti{
+  position:absolute;
+  width:12px;          /* bigger width */
+  height:28px;         /* bigger height */
+  border-radius:3px;
+  opacity:0;
+  pointer-events:none;
+  animation:confettiBurst linear infinite;
+}
+
+/* Firework-style burst using custom properties --dx and --dy */
+@keyframes confettiBurst{
+  0%{
+    transform:translate(0,0) scale(1) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translate(var(--dx), var(--dy)) scale(0.9) rotate(720deg);
+    opacity:0;
+  }
+}
+
+
+@media (max-width:720px){
+    #screen{
+    padding:20px 18px;
+  }
+
+  #narration{
+    font-size:20px;
+  }
+  #meta{
+    font-size:16px;
+  }
+}
