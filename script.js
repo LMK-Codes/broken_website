@@ -14,7 +14,7 @@ let playerName = "Name";
 let spaceCount = 0;
 let guessCount = 0;   // for the 1–100 “game”
 let triviaChosen = { "5": false, "22": false, "Potato": false };
-let TEXT_SPEED = 1.7;   // higher = slower, lower = faster
+let TEXT_SPEED = 0.05;   // higher = slower, lower = faster
 let scene12Started = false;
 let isTyping = false;
 // ===== SCENE NAVIGATION =====
@@ -592,7 +592,7 @@ function scene9_secondA() {
   setTimeout(() => {
     sayLines(
       [
-        "What the - no!",
+        "No! It's not even the same *colour-*",
         "*loading...*",
         "Okay, try again. Press A."
       ],
@@ -999,13 +999,24 @@ function branchB_spaceProgress() {
     );
   } else if (spaceCount >= 5) {
     sayLines(
-      ["...", "", "(I guess that's my answer.)"],
+      [
+        "Oh well.",
+        "This was fun.",
+        "",
+        "I suppose that's the real goal of the game, isn't it, to have fun.",
+        "",
+        "And now that the goal has been achieved, the game can end.",
+        "",
+        "Ready for it to end?"
+      ],
       {
         delay: 1100,
         clear: true,
         onDone: () => {
-          hintEl.textContent = "[press ENTER to restart]";
-          state = "end_stall";
+          clearChoices();
+          addChoice("yes", () => runScene("branchA_win"));
+          addChoice("no", () => runScene("branchA_appleSpamIntro"));
+          hintEl.textContent = "";
         }
       }
     );
